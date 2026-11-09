@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17384b">
+  <title>英歌·一个词｜教师端</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="teacher-page">
+  <header class="site-header">
+    <a class="brand" href="/teacher" aria-label="英歌一个词教师端首页">
+      <span class="brand-mark" id="brandIcon"></span>
+      <span><small>英歌舞 · 实时课堂</small><strong>英歌 · 一个词</strong></span>
+    </a>
+    <div class="header-meta"><span class="live-badge"><i></i>实时课堂互动</span><span id="connectionText">准备就绪</span></div>
+  </header>
+
+  <main>
+    <section class="teacher-welcome" id="welcomeView">
+      <div class="welcome-copy">
+        <p class="eyebrow">课前诊断 · 全班共创</p>
+        <h1>一词见英歌，<br><em>一班见共识。</em></h1>
+        <p class="welcome-desc">让学生先选出心中的英歌舞，再让全班的词频汇成看得见的课堂发现。</p>
+        <div class="feature-line"><span>四位房间码</span><span>最多三词</span><span>实时词频</span></div>
+      </div>
+      <div class="create-card">
+        <div class="drum-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="create-number">01</span>
+        <h2>发起一堂课</h2>
+        <p>生成课堂二维码后，学生用手机扫码即可进入。</p>
+        <label class="teacher-passcode-label" for="teacherPasscode">教师管理密码</label>
+        <input class="teacher-passcode" id="teacherPasscode" type="password" autocomplete="current-password" placeholder="输入部署时设置的密码">
+        <button class="primary-button large" id="createBtn" type="button">生成课堂与二维码</button>
+        <div class="create-note"><span class="status-dot"></span>学生无需注册 · 请及时导出课堂数据</div>
+      </div>
+    </section>
+
+    <section class="classroom" id="classView" hidden>
+      <div class="class-heading">
+        <div><p class="eyebrow">这一课，从一个词开始</p><h1>英歌舞，你会用哪些词描述它？</h1></div>
+        <div class="room-code-block"><span>房间码</span><strong id="roomCode">----</strong></div>
+      </div>
+      <div class="teacher-grid">
+        <aside class="qr-panel">
+          <div class="panel-label">学生入口</div>
+          <div class="qr-frame"><img id="qrImage" alt="学生扫码进入课堂的二维码"></div>
+          <h2>手机扫码，进入选词</h2>
+          <p>学生用手机扫码或打开课堂链接</p>
+          <div class="qr-actions"><button class="text-button" id="downloadQr" type="button">保存二维码</button><button class="text-button" id="copyLink" type="button">复制学生链接</button></div>
+          <details class="link-details"><summary>二维码无法识别？</summary><p id="studentLink"></p></details>
+        </aside>
+
+        <div class="control-area">
+          <div class="live-stats">
+            <div><span>在线学生</span><strong id="activeCount">0</strong><small>人</small></div>
+            <div><span>已提交</span><strong id="submittedCount">0</strong><small>人</small></div>
+            <div><span>当前环节</span><strong class="phase-value" id="phaseText">等待开始</strong></div>
+          </div>
+          <section class="control-panel">
+            <div class="panel-label">课堂节奏</div>
+            <div class="phase-track" aria-label="课堂环节进度"><span data-phase="idle" class="active">等待</span><i></i><span data-phase="voting">选词</span><i></i><span data-phase="closed">截止</span><i></i><span data-phase="reveal">揭晓</span></div>
+            <p class="teacher-tip" id="teacherTip">先让学生扫码入场，准备好后开始选词。</p>
+            <div class="control-buttons">
+              <button class="primary-button" id="startVote" type="button">开始选词</button>
+              <button class="secondary-button" id="closeVote" type="button" disabled>截止提交</button>
+              <button class="gold-button" id="revealVote" type="button" disabled>揭晓全班结果</button>
+            </div>
+            <button class="reset-button" id="resetRound" type="button" disabled>开启新一轮</button>
+          </section>
+          <div class="teacher-script"><span>课堂提示</span><p>先不急着告诉学生答案。等全班选择汇成词频，再追问：“这些词里，哪一个最能说出你看到的英歌舞？”</p></div>
+        </div>
+      </div>
+
+      <section class="teacher-roster" aria-labelledby="rosterTitle">
+        <div class="roster-heading"><div><p class="eyebrow">实时词频 · 匿名统计</p><h2 id="rosterTitle">全班的选择，一目了然。</h2></div><button class="secondary-button" id="exportData" type="button" disabled>导出 CSV</button></div>
+        <div class="live-top-panel"><span>当前最高票</span><strong id="liveTop">等待提交</strong><small id="liveTopCount">学生提交后实时更新</small></div>
+        <div class="roster-table-wrap">
+          <table class="roster-table"><thead><tr><th scope="col">词汇</th><th scope="col">选择人数</th><th scope="col">占已提交人数比例</th></tr></thead><tbody id="rosterRows"></tbody></table>
+        </div>
+        <p class="roster-note" id="rosterTotal">已进入 0 人 · 已提交 0 人 · 不收集姓名</p>
+      </section>
+
+      <section class="teacher-results" id="teacherResults" hidden>
+        <div class="results-heading"><div><p class="eyebrow">全班词频</p><h2>每一个人的选择，都有了回响。</h2></div><span id="resultTotal">共 0 人提交</span></div>
+        <div class="result-layout"><div class="result-list" id="teacherResultRows"></div><aside class="reveal-card"><span>不在选项里的那个词</span><strong>中华<br>战舞</strong><p>从学生的词，走向英歌舞的文化气质。</p></aside></div>
+        <div class="summary-strip" id="teacherSummary"></div>
+      </section>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <footer class="site-footer">英歌·一个词｜匿名实时课堂 · 不收集学生姓名</footer>
+  <script type="module" src="/teacher.js"></script>
+</body>
+</html>

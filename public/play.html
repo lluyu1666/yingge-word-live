@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17384b">
+  <title>英歌·一个词｜学生选词</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="student-page">
+  <header class="site-header student-header">
+    <a class="brand" href="/play" aria-label="英歌一个词学生端首页"><span class="brand-mark" id="brandIcon"></span><span><small>英歌舞 · 课前互动</small><strong>英歌 · 一个词</strong></span></a>
+    <div class="student-actions">
+      <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="播放或关闭英歌舞背景音乐"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Zm12-1c1.3 1.3 1.3 6.7 0 8m2.5-10.5c3 3 3 10 0 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="musicText">开启音乐</span></button>
+      <div class="student-room"><span class="connection-dot"></span><span id="studentConnection">连接中</span><strong id="studentRoom"></strong></div>
+    </div>
+  </header>
+  <audio id="bgMusic" src="/audio/happy-loop.wav" loop preload="auto"></audio>
+
+  <main class="student-main">
+    <section class="join-view" id="joinView" hidden>
+      <div class="join-art" aria-hidden="true"><span></span><i></i><i></i></div>
+      <p class="eyebrow">欢迎进入课堂</p><h1>匿名参与，击槌入场</h1><p>无需填写姓名，只需选择你心中的英歌舞。</p>
+      <label class="code-input-label" for="codeInput">课堂房间码</label>
+      <input class="code-input" id="codeInput" inputmode="numeric" maxlength="4" placeholder="0000" autocomplete="off">
+      <p class="form-error" id="joinError" role="alert"></p>
+      <button class="primary-button large full" id="joinBtn" type="button">进入课堂</button>
+    </section>
+
+    <section class="student-play" id="playView" hidden>
+      <div class="student-title-row"><div><p class="eyebrow" id="playKicker">课前选词</p><h1 id="playTitle">你眼中的英歌舞，是什么模样？</h1></div><span class="round-badge" id="roundBadge">第一轮</span></div>
+      <p class="student-desc" id="playDesc">从下列词汇中，选出最能描述它的 1—3 个词。</p>
+      <div class="selection-meter"><span>已选 <strong id="selectedCount">0</strong> / 3</span><div><i id="selectionFill"></i></div><small id="classSubmitted">全班已提交 0 人</small></div>
+      <div class="word-grid" id="wordGrid" role="group" aria-label="描述英歌舞的词汇"></div>
+      <div class="student-submit"><p id="selectionHint">点选词汇，再次点击可取消。</p><button class="primary-button large full" id="submitVote" type="button" disabled>等老师开始</button></div>
+    </section>
+
+    <section class="wait-view" id="waitView" hidden>
+      <div class="success-seal" id="waitIcon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="m18 33 10 10 20-24" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <p class="eyebrow" id="waitKicker">选择已送达</p><h1 id="waitTitle">你的答案，已汇入全班。</h1><p id="waitDesc">等老师截止并揭晓结果。</p>
+      <div class="chosen-words" id="chosenWords"></div>
+      <div class="waiting-rhythm" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="live-submitted" id="waitSubmitted">全班已提交 0 人</p>
+      <button class="secondary-button" id="modifyVote" type="button">修改我的选择</button>
+    </section>
+
+    <section class="student-reveal" id="revealView" hidden>
+      <p class="eyebrow">全班的选择</p><h1>我们的英歌舞，有了共同的轮廓。</h1><p class="student-desc" id="revealTotal"></p>
+      <div class="result-list student-results" id="studentResultRows"></div>
+      <div class="student-summary" id="studentSummary"></div>
+      <div class="student-reveal-word"><span>还有一个词，不在选项里</span><strong>中华战舞</strong><p>威猛、勇武、整齐……这些感受，共同走向英歌舞的精神气质。</p></div>
+      <button class="secondary-button full" id="finishView" type="button">我看完了</button>
+    </section>
+
+    <section class="finished-view" id="finishedView" hidden><div class="success-seal small"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="m18 33 10 10 20-24" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h1>谢谢你的参与</h1><p>把这份感受，带进接下来的英歌舞之旅。</p></section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <footer class="site-footer">击槌有声 · 众人有和</footer>
+  <script type="module" src="/play.js"></script>
+</body>
+</html>
