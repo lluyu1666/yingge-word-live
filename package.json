@@ -1,0 +1,17 @@
+{
+  "name": "yingge-word-live",
+  "version": "1.1.0",
+  "private": true,
+  "description": "英歌舞课堂实时词汇互动（公网部署版）",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

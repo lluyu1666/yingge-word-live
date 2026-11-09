@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: yingge-word-live
+    runtime: node
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: TEACHER_PASSCODE
+        sync: false
